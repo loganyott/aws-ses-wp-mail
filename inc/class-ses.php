@@ -4,7 +4,7 @@ namespace AWS_SES_WP_Mail;
 
 use Aws\Ses\SesClient;
 use Exception;
-use WP_Error;
+use \WP_Error;
 
 class SES {
 
@@ -193,12 +193,6 @@ class SES {
 	public function get_client() {
 		if ( ! empty( $this->client ) ) {
 			return $this->client;
-		}
-
-		// Ensure the AWS SDK can be loaded.
-		if ( ! class_exists( '\\Aws\\Ses\\SesClient' ) ) {
-			// Require AWS Autoloader file.
-			require_once dirname( dirname( __FILE__ ) ) . '/lib/aws-sdk/aws-autoloader.php';
 		}
 
 		$params = array(
