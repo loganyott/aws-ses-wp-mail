@@ -10,8 +10,13 @@
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  */
 
-if ( ( ! defined( 'AWS_SES_WP_MAIL_KEY' ) || ! defined( 'AWS_SES_WP_MAIL_SECRET' ) || ! defined( 'AWS_SES_WP_MAIL_REGION' ) ) && ! defined( 'AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE' ) ) {
-	return;
+defined('AWS_SES_WP_MAIL_KEY') ?: define( 'AWS_SES_WP_MAIL_KEY',  Env::get('AWS_SES_WP_MAIL_KEY') );
+defined('AWS_SES_WP_MAIL_SECRET') ?: define( 'AWS_SES_WP_MAIL_SECRET', Env::get('AWS_SES_WP_MAIL_SECRET') );
+defined('AWS_SES_WP_MAIL_REGION') ?: define( 'AWS_SES_WP_MAIL_REGION', Env::get('AWS_SES_WP_MAIL_REGION') );
+defined('AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE') ?: define( 'AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE', Env::get('AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE') );
+if ((empty( AWS_SES_WP_MAIL_KEY ) || empty( AWS_SES_WP_MAIL_SECRET ) || empty( AWS_SES_WP_MAIL_REGION )) && !( AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE )) {
+	error_log(__('AWS SES wp_mail drop-in activated, but is missing required configuration.'));
+    return;
 }
 
 require_once dirname( __FILE__ ) . '/inc/class-ses.php';
