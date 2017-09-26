@@ -15,7 +15,7 @@ defined('AWS_SES_WP_MAIL_SECRET') ?: define( 'AWS_SES_WP_MAIL_SECRET', Env::get(
 defined('AWS_SES_WP_MAIL_REGION') ?: define( 'AWS_SES_WP_MAIL_REGION', Env::get('AWS_SES_WP_MAIL_REGION') );
 defined('AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE') ?: define( 'AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE', Env::get('AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE') );
 if ((empty( AWS_SES_WP_MAIL_KEY ) || empty( AWS_SES_WP_MAIL_SECRET ) || empty( AWS_SES_WP_MAIL_REGION )) && !( AWS_SES_WP_MAIL_USE_INSTANCE_PROFILE )) {
-	error_log(__('AWS SES wp_mail drop-in activated, but is missing required configuration.'));
+	trigger_error(__('AWS SES wp_mail drop-in activated, but is missing required configuration.'), E_USER_NOTICE);
     return;
 }
 
